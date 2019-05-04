@@ -2,3 +2,4 @@
 
 export(rsquare_explore)
 export(rsquare_search)
+import(data.table)

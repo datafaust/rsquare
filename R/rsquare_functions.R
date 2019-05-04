@@ -5,6 +5,7 @@
 #' @param simplify This returns a tidy dataframe, defaults to TRUE, in BETA, parsing list fix in development.
 #' @keywords rsquare
 #' @export
+#' @import data.table
 #' @examples
 #' rsquare_search("40.75,-73.98","key/token","20161028",2000, simplify = TRUE)
 
@@ -26,7 +27,7 @@ rsquare_search = function(latlon,token,date,radius, simplify = TRUE){
       long = test$response$venues$location['lng']
       checkinscount = test$response$venues$stats['checkinsCount']
       userscount = test$response$venues$stats['usersCount']
-      herenow = test$response$venues$hereNow['count']
+      checkins = test$response$venues$stats['checkinsCount']
       phone = test$response$venues$contact['phone']
       
       #handle categories
@@ -46,7 +47,7 @@ rsquare_search = function(latlon,token,date,radius, simplify = TRUE){
       
       #bind all
       search_api = as.data.frame(cbind(locationid, locationname, location, postal_code,
-                                       lat, long,checkinscount,userscount,herenow,phone,z
+                                       lat, long,checkinscount,userscount,checkins,phone,z
       ))
       names(search_api) = tolower(names(search_api))
       search_api
@@ -79,6 +80,7 @@ rsquare_search = function(latlon,token,date,radius, simplify = TRUE){
 #' @param simplify This returns a tidy dataframe, defaults to TRUE
 #' @keywords rsquare
 #' @export
+#' @import data.table
 #' @examples
 #' rsquare_explore("40.75,-73.98","key/token","20161028",2000, simplify = TRUE)
 
